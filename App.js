@@ -1,16 +1,14 @@
-import { View, Text } from 'react-native'
-import React from 'react'
-import DefaultButton from './src/components/Buttons/DefaultButton'
-import LoginCustomer from './src/customer/LoginCustomer/LoginCustomer'
-import QuizCustomer from './src/customer/QuizCustomer/QuizCustomer'
+import { View, Text } from 'react-native';
+import React from 'react';
+import { NavigationContainer } from '@react-navigation/native'; // Import NavigationContainer
+import TabNavigator from './src/navigations/BottomNavFlow';
 
 const App = () => {
   return (
-    <View style={{flex: 1}}>
-      <QuizCustomer />
-      {/* <LoginCustomer /> */}
-    </View>
-  )
-}
+    <NavigationContainer>
+      <TabNavigator />  {/* Wrap your TabNavigator inside NavigationContainer */}
+    </NavigationContainer>
+  );
+};
 
-export default App
+export default App;
