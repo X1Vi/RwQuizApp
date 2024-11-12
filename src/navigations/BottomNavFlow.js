@@ -3,14 +3,16 @@ import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Icon from 'react-native-vector-icons/Ionicons'; // Import from react-native-vector-icons
 import QuizCustomer from '../customer/QuizCustomer/QuizCustomer';
-import Quiz from '../customer/Quiz';
+import Quiz from '../customer/QuizCustomer/Quiz';
 import ModifyQuiz from '../seller/ModifyQuiz';
+import SelectQuiz from '../seller/SelectQuiz';
+import StackNavigator from './StackFlow';
 const Tab = createBottomTabNavigator();
 
 const TabNavigator = () => {
   return (
     <Tab.Navigator
-      initialRouteName="NonEditableQuiz"
+      initialRouteName="StackNavigator"
       screenOptions={({ route }) => ({
         tabBarIcon: ({ color, size }) => {
           let iconName;
@@ -25,17 +27,17 @@ const TabNavigator = () => {
         tabBarInactiveTintColor: 'gray',
       })}
     >
-      <Tab.Screen
+      {/* <Tab.Screen
         name="NonEditableQuiz"
-        component={Quiz}
+        component={StackNavigator}
         initialParams={{ isEditableProp: false }}
         options={{ title: 'View Quiz' }}
-      />
+      /> */}
       <Tab.Screen
-        name="EditableQuiz"
-        component={ModifyQuiz}
+        name="StackNavigator"
+        component={StackNavigator}
         initialParams={{ isEditableProp: true }}
-        options={{ title: 'Edit Quiz' }}
+        options={{ headerShown:false }}
       />
     </Tab.Navigator>
   );

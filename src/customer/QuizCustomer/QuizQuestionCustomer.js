@@ -1,8 +1,23 @@
-import { View, Text, TouchableOpacity, TextInput } from 'react-native';
-import React, { useState } from 'react';
+import { View, Text, TouchableOpacity, TextInput, Alert } from 'react-native';
+import React, { useEffect, useState } from 'react';
 
-const QuizQuestionCustomerMCQ = ({ itemIndex = null, question, answers, isEditable = false, editableQuestionsAndAnswers = [], setEditableQuestionsAndAnswers }) => {
+const QuizQuestionCustomerMCQ = ({ itemIndex = null, question, answers, isEditable = false, editableQuestionsAndAnswers = [], setEditableQuestionsAndAnswers, answersState = null, setAnswers = null }) => {
     const [selectedAnswer, setSelectedAnswer] = useState(null); // State to track selected answer
+
+    useEffect(() => {
+        if(answers === null && setAnswers == null)
+        {
+            return;
+        }
+        if (selectedAnswer !== null) {
+            const updatedAnswers = { ...answersState };
+            updatedAnswers[question] = answers[selectedAnswer];
+            setAnswers(updatedAnswers);
+        }
+
+        console.log(answersState);
+        
+    }, [selectedAnswer]);
 
     // Function to handle answer change
     const handleAnswerChange = (text, index) => {
@@ -48,8 +63,8 @@ const QuizQuestionCustomerMCQ = ({ itemIndex = null, question, answers, isEditab
     return (
         <View style={{ flex: 1, backgroundColor: "#FCFCFC", padding: 20 }}>
             {isEditable ? (
-                <TouchableOpacity 
-                    onPress={handleDelete} 
+                <TouchableOpacity
+                    onPress={handleDelete}
                     style={{
                         width: '100%',
                         alignItems: 'flex-end',
