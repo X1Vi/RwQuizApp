@@ -6,7 +6,7 @@ import TabNavigator from './src/navigations/BottomNavFlow';
 const App = () => {
   return (
     <NavigationContainer>
-      <TabNavigator />  {/* Wrap your TabNavigator inside NavigationContainer */}
+      <TabNavigator />  
     </NavigationContainer>
   );
 };

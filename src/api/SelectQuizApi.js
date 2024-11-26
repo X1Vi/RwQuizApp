@@ -84,3 +84,20 @@ const answers = {
     "What is the largest planet in our Solar System?": "Jupiter",
     "Which country is known as the Land of the Rising Sun?": "Japan"
 };
+
+
+export const createQuiz = async (title, description, questions) => {
+    try {
+        const response = await axios.post(`http://10.0.2.2:8000/api/quizzes/`, {
+            title,
+            description,
+            questions,
+        });
+        
+        console.log("API Response:", response.data); // Log the API response data
+        return response.data; // Return the response data after logging
+    } catch (error) {
+        console.error("Failed to create quiz:", error.response ? error.response.data : error.message);
+        throw error; // Re-throw the error to handle it in the calling function
+    }
+};

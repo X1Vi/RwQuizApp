@@ -3,14 +3,15 @@ import { View, Text, ActivityIndicator, TouchableOpacity } from 'react-native';
 import axios from 'axios';
 import { useNavigation } from '@react-navigation/native';
 import { fetchQuizzes } from '../api/SelectQuizApi';
-const QuizSelector = ({navigateToModifyQuiz = true}) => {
+import { ScrollView } from 'react-native';
+const QuizSelector = ({ navigateToModifyQuiz = true }) => {
   const navigation = useNavigation();
   const [quizzes, setQuizzes] = useState([]);
   const [loading, setLoading] = useState(true);
   const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
 
-  
+
   useEffect(() => {
     fetchQuizzes(page, setQuizzes, setHasMore, setLoading);
   }, [page]);
@@ -22,19 +23,17 @@ const QuizSelector = ({navigateToModifyQuiz = true}) => {
   };
 
   return (
-    <View style={{ backgroundColor: '#FCFCFC', padding: 20, borderRadius: 8, flex:1 }}>
+    <ScrollView style={{ backgroundColor: '#FCFCFC', padding: 20, borderRadius: 8, flex: 1 }}>
       {quizzes.map((quiz) => (
         <TouchableOpacity
           key={quiz.id}
           onPress={() => {
-            if(navigateToModifyQuiz === true)
-            {
+            if (navigateToModifyQuiz === true) {
               navigation.navigate('EditableQuiz', {
                 quizData: quiz,
               });
             }
-            else
-            {
+            else {
               navigation.navigate('Quiz', {
                 quizData: quiz
               })
@@ -99,7 +98,28 @@ const QuizSelector = ({navigateToModifyQuiz = true}) => {
           </Text>
         </TouchableOpacity>
       ) : null}
-    </View>
+
+      <TouchableOpacity
+        onPress={()=>{
+          navigation.navigate('CreateQuiz')
+        }}
+        style={{
+          backgroundColor: '#C43939',
+          paddingVertical: 10,
+          paddingHorizontal: 20,
+          borderRadius: 5,
+          alignSelf: 'center',
+          marginTop: 20,
+        }}
+      >
+        <Text style={{ color: '#FCFCFC', fontSize: 16, textAlign: 'center' }}>
+          Create Quiz
+        </Text>
+      </TouchableOpacity>
+      <View style={{height:100}}>
+
+      </View>
+    </ScrollView>
   );
 };
 
